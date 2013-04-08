@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %} Main Page {% endblock %}
+
+{% block content %}
+
+  <div class="header">
+      {% load static %}
+	  <img src="{% static 'img/title.jpg' %}" width="1262" height="135" />
+  </div>
+
+  <div class="content">
+    <h1 align="center"><em>Choose the panel you want to work with!</em></h1>
+
+    <p align="center">
+        <a href="pm10">
+            <img src="{% static 'img/PMExpress_80_80_Lobby_1.jpg' %}" width="80" height="80" align="center" longdesc="PM10" />
+            <strong>Power Master 10</strong>
+        </a>
+	</p> 
+    <p align="center">
+        <a href="pm30">
+            <img src="{% static 'img/PowerMaster_30_80_80_lobby.jpg' %}" width="80" height="80" align="center" longdesc="PM30" />
+            <strong>Power Master 30</strong>
+        </a>
+	</p>
+ </div>
+
+{% endblock %}

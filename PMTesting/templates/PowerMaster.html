@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %} PowerMaster30 {% endblock %}
+
+{% block content %}
+
+{% load static %}
+<script type="text/javascript" src="{% static 'js/Forms.js' %}"></script>
+
+<style>
+    #hidePanel {
+        margin:0 0 0 auto;
+        font-size: 11px;
+        cursor: pointer;
+        width: 30px;
+    }
+    #PanelUI {
+        -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Для Firefox */
+        -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Для Safari и Chrome */
+        box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+        border-radius: 10px;
+        z-index:10;
+    }
+    #Panel table {
+        border-radius: 0 0 10px 10px;
+    }
+</style>
+
+<div class="mainBlock">
+    <div class="header">
+        <a href="#">
+            {% if type == "pm30" %}
+                <img src="{% static 'img/pm30main.jpg' %}" alt="PowerMaster30" name="PowerMaster30" width="1024" height="90" id="PowerMaster30" />
+            {% else %}
+                <img src="{% static 'img/pm10main.png' %}" alt="PowerMaster10" name="PowerMaster10" width="1024" height="90" id="PowerMaster10" />
+            {% endif %}
+        </a>
+    </div>
+
+    <div class="content" style="width:1024px;">
+        <div id="PanelUI" style="position: absolute; right: 20px; left: auto; width: 270px;">
+            <div style="text-align: right; background-color: darkgray; border-radius: 10px 10px 0 0;">
+                <p id="hidePanel">Hide</p>
+            </div>
+            {% include "panelUI.html" with btnNames=panel_buttons custom_actions=panel_custom_actions %}
+        </div>
+
+        <div id="Contacts">
+            <h3>Contacts</h3>
+            {% include "usercontrols/UCZones.html" with className='contactForm' zones=contact_zones partitions=partitions locations=locations zone_types=zone_types device_buttons=device_buttons %}
+        </div>
+        <div id="Motions">
+            <h3>Motion detectors</h3>
+            {% include "usercontrols/UCZones.html" with className='motionForm' zones=motion_zones partitions=partitions locations=locations zone_types=zone_types device_buttons=device_buttons %}
+        </div>
+        <div id="Keyfobs">
+            <h3>Keyfob</h3>
+            <div>
+                <input type="submit" name="awayk" id="awayk" value="AWAY" />
+                <input type="submit" name="homek" id="homek" value="HOME" />
+                <input type="submit" name="disarmk" id="disarmk" value="DISARM" />
+                <input type="submit" name="auxk" id="auxk" value=" * " />
+                <input type="submit" name="enrollk" id="enrolk" value="Enroll" />
+                <input type="submit" name="panick" id="panick" value="PANIC" />
+            </div>
+        </div>
+    </div>
+
+    <div id="IPMPLog" style="width: 1024px; border: 1px solid darkgray; margin-top: 5px; border-radius: 15px;">
+
+        <h3>IPMP Log</h3>
+        {% include "IPMPLog.html" %}
+    </div>
+
+{#    <div class="footer">#}
+{#    </div>#}
+  
+</div>
+<script type="text/javascript" language="javascript">
+$(document).ready(function() {
+    document.DEBUG = false;
+
+    $( "input[type=submit]" ).button();
+
+    var devices = new Device();
+    devices.Init();
+
+    var panel = new Panel();
+    panel.EnableScreenUpdate = false;
+    panel.Init();
+
+    var ipmpLog = new IpmpLog();
+    ipmpLog.Init();
+});
+
+</script>
+
+{% endblock %}

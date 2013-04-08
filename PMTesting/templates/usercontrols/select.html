@@ -1,0 +1,6 @@
+<label for="{{ id }}">{{ label }}</label>
+<select name="{{ id }}" id="{{ id }}">
+{% for o in options %}
+	<option>{{ o }}</option>
+{% endfor %}
+</select>

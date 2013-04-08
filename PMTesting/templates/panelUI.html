@@ -1,0 +1,64 @@
+<style>
+    #panel_screen {
+        font-weight: bold;
+    }
+</style>
+
+<form id="Panel" name="Panel" method="post" action="panel" >
+<table width="270"  bgcolor="#FFFFCC" style="border-collapse: separate;">
+    <tr>
+        <td height="52" colspan="4" bgcolor="#0099FF">
+            <p id="panel_screen" align="center">
+                READY
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td width="61" align="center"><input type="submit" name='{{ panel_buttons.PREV }}' id="prev" value="  <<  " /></td>
+        <td width="61" align="center"><input type="submit" name='{{ panel_buttons.NEXT }}' id="next" value="  >>  " /></td>
+        <td width="61" align="center"><input type="submit" name='{{ panel_buttons.OK }}' id="okbut" value="  OK  " /></td>
+        <td width="61">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="61" align="center"><input type="submit" name="{{ panel_buttons.BTN_1 }}" id="1but" value="  1  " /></td>
+        <td width="61" align="center"><input type="submit" name="{{ panel_buttons.BTN_2 }}" id="2but" value="  2  " /></td>
+        <td width="61" align="center"><input type="submit" name="{{ panel_buttons.BTN_3 }}" id="3but" value="  3  " /></td>
+        <td align="center"><input type="submit" name="{{ panel_buttons.AWAY }}" id="away" value="Away" /></td>
+    </tr>
+    <tr>
+        <td align="center"><input type="submit" name="{{ panel_buttons.BTN_4 }}" id="4but" value="  4  " /></td>
+        <td align="center"><input type="submit" name="{{ panel_buttons.BTN_5 }}" id="5but" value="  5  " /></td>
+        <td align="center"><input type="submit" name="{{ panel_buttons.BTN_6 }}" id="6but" value="  6  " /></td>
+        <td align="center"><input type="submit" name="{{ panel_buttons.HOME }}" id="home" value="Home" /></td>
+    </tr>
+    <tr>
+        <td align="center"><input type="submit" name="{{ panel_buttons.BTN_7 }}" id="7but" value="  7  " /></td>
+        <td align="center"><input type="submit" name="{{ panel_buttons.BTN_8 }}" id="8but" value="  8  " /></td>
+        <td align="center"><input type="submit" name="{{ panel_buttons.BTN_9 }}" id="9but" value="  9  " /></td>
+        <td align="center"><input type="submit" name="{{ panel_buttons.DISARM }}" id="disarm" value="Disarm" /></td>
+    </tr>
+    <tr>
+        <td align="center"><input type="submit" name="{{ panel_buttons.LOG }}" id="log" value="*|log" /></td>
+        <td align="center"><input type="submit" name="{{ panel_buttons.BTN_0 }}" id="0but" value="  0  " /></td>
+        <td align="center"><input type="submit" name="{{ panel_buttons.DIES }}" id="dies" value="  #  " /></td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="center" style="padding-bottom:10px;" style="padding-bottom:10px;"><input type="submit" name="{{ panel_buttons.EMRG }}" id="emrg" value="  +  " /></td>
+        <td align="center" style="padding-bottom:10px;"><input type="submit" name="{{ panel_buttons.PANIC }}" id="panic" value="Panic" /></td>
+        <td align="center" style="padding-bottom:10px;"><input type="submit" name="{{ panel_buttons.FIRE }}" id="fire" value="Fire" /></td>
+        <td style="padding-bottom:10px;">&nbsp;</td>
+    </tr>
+    <tr >
+        <td align="center" style="border-top: thin solid black;">
+            <span style="font-size: 12px;">Custom:</span>
+        </td>
+        <td align="center" style="border-top: thin solid black;" colspan="2">
+            {% include "usercontrols/select.html" with id="custom_action" options=custom_actions only %}
+        </td>
+        <td align="center" style="border-top: thin solid black;">
+            <input type="submit" name="{{ panel_buttons.RUN_CUSTOM }}" id="custom" value="Run" />
+        </td>
+    </tr>
+</table>
+</form>

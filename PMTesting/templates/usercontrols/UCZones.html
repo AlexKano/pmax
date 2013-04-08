@@ -1,0 +1,30 @@
+{% for i in zones %}
+    <form class='{{ className }}' id="zone{{ i }}" name="zone{{ i }}" method="post" action="device">
+        <table width="780" >
+            <tr>
+                <td>
+                    Zone {{ i }}
+                    <input type="hidden" name="zone" value='{{ i }}' />
+                </td>
+                <td>
+                    {% include "usercontrols/select.html" with id="location" options=locations only %}
+                </td>
+                <td>
+                    {% include "usercontrols/select.html" with id="zone_type" options=zone_types only %}
+                </td>
+                <td>
+                    {% include "usercontrols/select.html" with id="partition" options=partitions only %}
+                </td>
+                <td>
+                    <input type="submit" name="{{ device_buttons.ENROLL }}" id="enrol{{ i }}" value="Enroll" />
+                    <input type="submit" name="{{ device_buttons.TAMPER }}" id="tamper{{ i }}" value="Open Tamper" />
+                    <input type="submit" name="{{ device_buttons.OPEN }}" id="open{{ i }}" value="Open" />
+                </td>
+                <td>
+                    <span id="timer{{ i }}" align="center" style="margin:0">0</span>
+                    <input type="submit" name="{{ device_buttons.STOP }}" id="Stop{{ i }}" value="Stop" />
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endfor %}
