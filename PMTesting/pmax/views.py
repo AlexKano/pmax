@@ -66,26 +66,26 @@ def panel_view(request):
     return HttpResponse(panel.GetScreen())
 
 
-from pmax.core.Cache import GlobalStorage
-import time
-@csrf_exempt
-def ipmp_log_view(request):
-    time.sleep(1)
-    post = request.POST
-    lines = []
-    if post.get('action') == 'run':
-        if not GlobalStorage.IpmpLog:
-            GlobalStorage.IpmpLog = IpmpLog(post.get('IP'), post.get('user'), post.get('pass'))
-        log = GlobalStorage.IpmpLog
-        log.openSSHSession()
-        log.startLog()
-        lines = log.getLog()
-    else:
-        GlobalStorage.IpmpLog.closeSSHSession()
-        GlobalStorage.IpmpLog = None
+# from pmax.core.Cache import GlobalStorage
+# import time
+# @csrf_exempt
+# def ipmp_log_view(request):
+    # time.sleep(1)
+    # post = request.POST
+    # lines = []
+    # if post.get('action') == 'run':
+        # if not GlobalStorage.IpmpLog:
+            # GlobalStorage.IpmpLog = IpmpLog(post.get('IP'), post.get('user'), post.get('pass'))
+        # log = GlobalStorage.IpmpLog
+        # log.openSSHSession()
+        # log.startLog()
+        # lines = log.getLog()
+    # else:
+        # GlobalStorage.IpmpLog.closeSSHSession()
+        # GlobalStorage.IpmpLog = None
 
-    response = json.dumps({ 'lines': lines })
-    return HttpResponse(response)
+    # response = json.dumps({ 'lines': lines })
+    # return HttpResponse(response)
 
 
 from django.core.cache import cache
