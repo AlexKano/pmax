@@ -78,7 +78,7 @@
 </div>
 <script type="text/javascript" language="javascript">
 $(document).ready(function() {
-    document.DEBUG = false;
+    document.DEBUG = true;
 
     $( "input[type=submit]" ).button();
 
@@ -86,7 +86,7 @@ $(document).ready(function() {
     devices.Init();
 
     var panel = new Panel();
-    panel.EnableScreenUpdate = false;
+    panel.EnableScreenUpdate = true;
     panel.Init();
 
     var ipmpLog = new IpmpLog();

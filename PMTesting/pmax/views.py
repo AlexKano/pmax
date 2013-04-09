@@ -62,8 +62,13 @@ def device_view(request):
 
 @csrf_exempt
 def panel_view(request):
-    panel = Panel(request.POST)
-    return HttpResponse(panel.GetScreen())
+	panel = Panel(request.POST)
+	if panel.Action is None:
+		return HttpResponse(panel.GetScreen())
+	else:
+		panel.InvokeAction()
+		response = json.dumps({ 'success': 'success' , 'error': ''})
+		return HttpResponse(response)
 
 
 # from pmax.core.Cache import GlobalStorage

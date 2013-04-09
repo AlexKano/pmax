@@ -63,7 +63,7 @@ Panel.prototype = new Form();
 jQuery.extend(Panel.prototype, {
     _doUpdate: false,
     _timerId: 0,
-    _checkInterval: 500,
+    _checkInterval: 1000,
     PanelBlock: null,
     MainForm: null,
     Screen: null,
@@ -93,6 +93,8 @@ jQuery.extend(Panel.prototype, {
 
         self._initShowHideBtn();
         self._disableBtn(self.btnRunCustom, true);
+		
+		self.StartUpdating();
     },
 
     _initShowHideBtn: function(){

@@ -1,8 +1,7 @@
 __author__ = 'KANO'
-#import navigator
-import random
-import logging
-
+#import random
+#import logging
+import xmlrpclib
 
 class PanelActions:
     NEXT = "next"
@@ -38,6 +37,7 @@ class PanelActions:
 
 
 class Panel:
+    navigator = xmlrpclib.ServerProxy('http://127.0.0.1:8000')
     Action = None
     CustomAction = None
 
@@ -47,24 +47,25 @@ class Panel:
     def __init__(self, params):
         self.Action = params.get('action', None)
         self.CustomAction = params.get('custom_action', None)
-        pass
-        # self.__initActions()
-        logging.basicConfig(filename='example.log', level=logging.INFO)
+        #pass
+        #self.__initActions()
+        #logging.basicConfig(filename='example.log', level=logging.INFO)
 
     def GetScreen(self):
-        s = ["READY", "STEADY", "XYU", "AI", "LOS", "BENITO"]
-        return s[random.randint(0, len(s) - 1)]
-        # return navigator.read()
+        #s = ["READY", "STEADY", "XYU", "AI", "LOS", "BENITO"]
+        #return s[random.randint(0, len(s) - 1)]
+        return self.navigator.get_lcd()
 
-    # def LogToInst(self, event):
-    #     navigator.login('9999')
+    #def LogToInst(self, event):
+       # navigator.login('9999')
     #
-    # def LogToUser(self, event):
-    #     navigator.loginToUserSettings('1111')
+    #def LogToUser(self, event):
+        #self.navigator.loginToUserSettings('1111')
 
     def InvokeAction(self):
-        logging.info(self.Action)
-        # if self.Action == self.ConstActions.RUN_CUSTOM:
-        #     self.__runCustomAction()
-        # else:
-        #     navigator.send_key_fast(self.Action)
+	    #pass
+        #logging.info(self.Action)
+        if self.Action == PanelActions.RUN_CUSTOM:
+            self.__runCustomAction()
+        else:
+            self.navigator.send_key(self.Action)

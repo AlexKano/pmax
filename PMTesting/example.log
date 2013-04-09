@@ -1,0 +1,449 @@
+ERROR:django.request:Internal Server Error: /pm30
+Traceback (most recent call last):
+  File "C:\Python26\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python26\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "L:\Django project\PMTesting\pmax\views.py", line 25, in pm30_page
+    return processDeviceRequest(request.POST)
+  File "L:\Django project\PMTesting\pmax\views.py", line 41, in processDeviceRequest
+    device = Device(post)
+  File "L:\Django project\PMTesting\pmax\logic\Device.py", line 25, in __init__
+    self.ZoneId = int(params.get('zone', 0).split()[1])
+AttributeError: 'int' object has no attribute 'split'
+ERROR:django.request:Internal Server Error: /pm30
+Traceback (most recent call last):
+  File "C:\Python26\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python26\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "L:\Django project\PMTesting\pmax\views.py", line 25, in pm30_page
+    return processDeviceRequest(request.POST)
+  File "L:\Django project\PMTesting\pmax\views.py", line 41, in processDeviceRequest
+    device = Device(post)
+  File "L:\Django project\PMTesting\pmax\logic\Device.py", line 25, in __init__
+    self.ZoneId = int(params.get('zone', 0).split()[1])
+AttributeError: 'int' object has no attribute 'split'
+ERROR:django.request:Internal Server Error: /pm30
+Traceback (most recent call last):
+  File "C:\Python26\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python26\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "L:\Django project\PMTesting\pmax\views.py", line 25, in pm30_page
+    return processDeviceRequest(request.POST)
+  File "L:\Django project\PMTesting\pmax\views.py", line 41, in processDeviceRequest
+    device = Device(post)
+  File "L:\Django project\PMTesting\pmax\logic\Device.py", line 25, in __init__
+    self.ZoneId = int(params.get('zone', 0).split()[1])
+IndexError: list index out of range
+ERROR:django.request:Internal Server Error: /pm30
+Traceback (most recent call last):
+  File "C:\Python26\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python26\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "L:\Django project\PMTesting\pmax\views.py", line 25, in pm30_page
+    return processDeviceRequest(request.POST)
+  File "L:\Django project\PMTesting\pmax\views.py", line 42, in processDeviceRequest
+    device.InvokeAction()
+  File "L:\Django project\PMTesting\pmax\logic\Device.py", line 53, in InvokeAction
+    self._actions[self.Action](self)
+KeyError: u''
+ERROR:django.request:Internal Server Error: /pm30
+Traceback (most recent call last):
+  File "C:\Python26\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python26\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "L:\Django project\PMTesting\pmax\views.py", line 25, in pm30_page
+    return processDeviceRequest(request.POST)
+  File "L:\Django project\PMTesting\pmax\views.py", line 42, in processDeviceRequest
+    device.InvokeAction()
+  File "L:\Django project\PMTesting\pmax\logic\Device.py", line 53, in InvokeAction
+    self._actions[self.Action](self)
+KeyError: u''
+ERROR:django.request:Internal Server Error: /pm30
+Traceback (most recent call last):
+  File "C:\Python26\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python26\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "L:\Django project\PMTesting\pmax\views.py", line 25, in pm30_page
+    return processDeviceRequest(request.POST)
+  File "L:\Django project\PMTesting\pmax\views.py", line 42, in processDeviceRequest
+    device.InvokeAction()
+  File "L:\Django project\PMTesting\pmax\logic\Device.py", line 53, in InvokeAction
+    self._actions[self.Action](self)
+KeyError: u''
+ERROR:django.request:Internal Server Error: /pm30
+Traceback (most recent call last):
+  File "C:\Python26\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python26\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "L:\Django project\PMTesting\pmax\views.py", line 25, in pm30_page
+    return processDeviceRequest(request.POST)
+  File "L:\Django project\PMTesting\pmax\views.py", line 42, in processDeviceRequest
+    device.InvokeAction()
+  File "L:\Django project\PMTesting\pmax\logic\Device.py", line 53, in InvokeAction
+    self._actions[self.Action](self)
+KeyError: u''
+ERROR:django.request:Internal Server Error: /pm30
+Traceback (most recent call last):
+  File "C:\Python26\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python26\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "L:\Django project\PMTesting\pmax\views.py", line 25, in pm30_page
+    return processDeviceRequest(request.POST)
+  File "L:\Django project\PMTesting\pmax\views.py", line 42, in processDeviceRequest
+    device.InvokeAction()
+  File "L:\Django project\PMTesting\pmax\logic\Device.py", line 53, in InvokeAction
+    self._actions[self.Action](self)
+KeyError: u''
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
+ERROR:django.request:Internal Server Error: /panel_view
+Traceback (most recent call last):
+  File "c:\Python27\lib\site-packages\django\core\handlers\base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "c:\Python27\lib\site-packages\django\views\decorators\csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Install\PMTesting\PMTesting\pmax\views.py", line 66, in panel_view
+    return HttpResponse(panel.GetScreen())
+  File "D:\Install\PMTesting\PMTesting\pmax\logic\Panel.py", line 57, in GetScreen
+    return self.navigator.get_lcd()
+  File "c:\Python27\lib\xmlrpclib.py", line 1224, in __call__
+    return self.__send(self.__name, args)
+  File "c:\Python27\lib\xmlrpclib.py", line 1570, in __request
+    verbose=self.__verbose
+  File "c:\Python27\lib\xmlrpclib.py", line 1264, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "c:\Python27\lib\xmlrpclib.py", line 1289, in single_request
+    self.send_request(h, handler, request_body)
+  File "c:\Python27\lib\xmlrpclib.py", line 1391, in send_request
+    connection.putrequest("POST", handler, skip_accept_encoding=True)
+  File "c:\Python27\lib\httplib.py", line 845, in putrequest
+    raise CannotSendRequest()
+CannotSendRequest
