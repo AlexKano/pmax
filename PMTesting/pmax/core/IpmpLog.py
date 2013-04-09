@@ -23,39 +23,39 @@ class IpmpLog:
         self.Password = ssh_password
 
     def openSSHSession(self):
-        pass
-        #     ssh = paramiko.SSHClient()
-        #     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        #     ssh.connect(self.IP, username='root', password=self.Password, port=self.Port)
-        #     ssh.exec_command('s')
-        #     ssh.exec_command('l')
-        #     ssh.exec_command('visonic')
-        #     transport = ssh.get_transport()
-        #     channel = transport.open_session()
-        #
-        #     self._sshSession = ssh
-        #     self._sshChannel = channel
+        #pass
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(self.IP, username='root', password=self.Password, port=self.Port)
+        ssh.exec_command('s')
+        ssh.exec_command('l')
+        ssh.exec_command('visonic')
+        transport = ssh.get_transport()
+        channel = transport.open_session()
+        
+        self._sshSession = ssh
+        self._sshChannel = channel
 
     def startLog(self):
         if not self._isLogRunning:
-            # self._sshChannel.exec_command(self.LogCommand)
+             self._sshChannel.exec_command(self.LogCommand)
             self._isLogRunning = True
 
     def closeSSHSession(self):
-        # if self._sshSession:
-        #     self._sshSession.close()
+         if self._sshSession:
+             self._sshSession.close()
         self._isLogRunning = False
 
     def getLog(self, lines_limit=100):
-        t = "some log"
-        a = []
-        for i in range(100):
-            a.append(t + str(i))
-        return a
-        # str1 = self._sshChannel.recv(1024)
-        # str_split = str1.split("\n")
-        # self.Log = str_split[:lines_limit]
-        # return self.Log
+        #t = "some log"
+        #a = []
+        #for i in range(100):
+        #    a.append(t + str(i))
+        #return a
+        str1 = self._sshChannel.recv(1024)
+        str_split = str1.split("\n")
+        self.Log = str_split[:lines_limit]
+        return self.Log
 
     # def waitforString(self, channel, string, timeout=100, num=1, check_interval=100):
     #     data = string.split('***')
