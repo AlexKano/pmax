@@ -21,6 +21,7 @@ class Device:
     _updateScreen = False
 
     _actions = {}
+    card = xmlrpclib.ServerProxy('http://127.0.0.1:8000')
 
     _enrollParameters = [("0", "10000", "0", 4, 1),
                          ("0", "1", "0", 4, 1),
