@@ -1,6 +1,10 @@
 <label for="{{ id }}">{{ label }}</label>
 <select name="{{ id }}" id="{{ id }}">
 {% for o in options %}
-	<option>{{ o }}</option>
+	{% if o == selected_option %}
+		<option selected>{{ o }}</option>
+	{% else %}
+		<option>{{ o }}</option>
+	{% endif %}
 {% endfor %}
 </select>
