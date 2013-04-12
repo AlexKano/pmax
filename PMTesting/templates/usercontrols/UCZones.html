@@ -7,10 +7,10 @@
                     <input type="hidden" name="zone" value='{{ i }}' />
                 </td>
                 <td>
-                    {% include "usercontrols/select.html" with id="location" options=locations only %}
+                    {% include "usercontrols/select.html" with id="location" options=locations selected_option=locations[i] only %}
                 </td>
                 <td>
-                    {% include "usercontrols/select.html" with id="zone_type" options=zone_types only %}
+                    {% include "usercontrols/select.html" with id="zone_type" options=zone_types selected_option=zone_types[i] only %}
                 </td>
                 <td>
                     {% include "usercontrols/select.html" with id="partition" options=partitions only %}
