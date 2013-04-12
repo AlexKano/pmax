@@ -38,12 +38,12 @@ class IpmpLog:
 
     def startLog(self):
         if not self._isLogRunning:
-             self._sshChannel.exec_command(self.LogCommand)
+            self._sshChannel.exec_command(self.LogCommand)
             self._isLogRunning = True
 
     def closeSSHSession(self):
-         if self._sshSession:
-             self._sshSession.close()
+        if self._sshSession:
+            self._sshSession.close()
         self._isLogRunning = False
 
     def getLog(self, lines_limit=100):

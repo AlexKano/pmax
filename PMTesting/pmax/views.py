@@ -24,10 +24,13 @@ def powerMaster30_page(request):
     response = __getResponseParams()
     response["type"] = Constants.POWER_MAX_30
     return render_to_response('PowerMaster.html', response)
-
-
+	
+	
+	
 def __getResponseParams():
+    contacts_info = [Device(),Device(),Device()Device(),Device()]
     return {"contact_zones": Constants.CONTACT_ZONES,
+            "contacts_info": contacts_info
             "motion_zones": Constants.MOTION_ZONES,
             "partitions": Constants.PARTITIONS,
             "zone_types": Constants.ZONE_TYPES,
