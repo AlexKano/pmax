@@ -7,10 +7,11 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
                        # Examples:
                        url(r'^$', 'pmax.views.main_page', name='home'),
-                       url(r'pm10', 'pmax.views.powerMaster10_page', name='pm10'),
-                       url(r'pm30', 'pmax.views.powerMaster30_page', name='pm30'),
-                       url(r'device', 'pmax.views.device_view', name='device_view'),
-                       url(r'panel', 'pmax.views.panel_view', name='panel_view'),
+                       # url(r'pm10', 'pmax.views.powerMaster10_page', name='pm10'),
+                       # url(r'pm30', 'pmax.views.powerMaster30_page', name='pm30'),
+                       url(r'(?P<panel_type>(pm10|pm30))/device', 'pmax.views.device_view', name='device_view'),
+                       url(r'(?P<panel_type>(pm10|pm30))/panel', 'pmax.views.panel_view', name='panel_view'),
+                       url(r'(?P<panel_type>(pm10|pm30))', 'pmax.views.powerMaster_page'),
                        url(r'ipmpLog', 'pmax.views.ipmp_log_view', name='ipmpLog'),
                        # url(r'^PMTesting/', include('PMTesting.foo.urls')),
 

@@ -2,9 +2,12 @@ __author__ = 'KANO'
 # import select
 # import time
 # import paramiko
+from pmax.core.Cache import GlobalStorage
 
 
 class IpmpLog:
+    CACHE_KEY_IPMP_LOG = "IPMP_LOG_"
+
     IP = None
     Password = None
     UserName = None
@@ -23,18 +26,18 @@ class IpmpLog:
         self.Password = ssh_password
 
     def openSSHSession(self):
-        #pass
-        ssh = paramiko.SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(self.IP, username='root', password=self.Password, port=self.Port)
-        ssh.exec_command('s')
-        ssh.exec_command('l')
-        ssh.exec_command('visonic')
-        transport = ssh.get_transport()
-        channel = transport.open_session()
-        
-        self._sshSession = ssh
-        self._sshChannel = channel
+        pass
+        # ssh = paramiko.SSHClient()
+        # ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        # ssh.connect(self.IP, username='root', password=self.Password, port=self.Port)
+        # ssh.exec_command('s')
+        # ssh.exec_command('l')
+        # ssh.exec_command('visonic')
+        # transport = ssh.get_transport()
+        # channel = transport.open_session()
+        #
+        # self._sshSession = ssh
+        # self._sshChannel = channel
 
     def startLog(self):
         if not self._isLogRunning:
@@ -47,15 +50,19 @@ class IpmpLog:
         self._isLogRunning = False
 
     def getLog(self, lines_limit=100):
-        #t = "some log"
-        #a = []
-        #for i in range(100):
-        #    a.append(t + str(i))
-        #return a
         str1 = self._sshChannel.recv(1024)
         str_split = str1.split("\n")
         self.Log = str_split[:lines_limit]
         return self.Log
+
+
+    @classmethod
+    def GetByIP(cls, IP):
+        return GlobalStorage.IpmpLog.get(cls.CACHE_KEY_IPMP_LOG + IP)
+
+    @classmethod
+    def SetByIP(cls, log_obj):
+        GlobalStorage.IpmpLog[cls.CACHE_KEY_IPMP_LOG + log_obj.IP] = log_obj
 
     # def waitforString(self, channel, string, timeout=100, num=1, check_interval=100):
     #     data = string.split('***')

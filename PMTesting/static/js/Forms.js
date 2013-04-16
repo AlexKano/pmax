@@ -43,17 +43,71 @@ Form.prototype = {
             $btn.removeClass("ui-state-disabled");
         }
     }
-}
+};
 
 // contact, motion, etc.
 function Device() {}
 Device.prototype = new Form();
 jQuery.extend(Device.prototype, {
-    Init: function(){
+    _startTimerBtnName: null,
+    _stopTimerBtnName: null,
+    _isOpened: null,
+
+    Init: function(deviceForm, timersPool, startTimerBtnName, stopTimerBtnName){
         var self = this;
-        $('.contactForm').on('submit', function(e){
+        self._startTimerBtnName = startTimerBtnName;
+        self._stopTimerBtnName = stopTimerBtnName;
+
+        var timer = new Timer();
+        var timerId = +deviceForm.find('[name=zone]').val();
+        var timeElement = deviceForm.find('.timer').text("0:00");
+        timer.Init(timerId, timeElement);
+        timersPool[timerId] = timer;
+
+        self._bindEvents(deviceForm, timersPool);
+    },
+
+    _bindEvents: function(deviceForm, timersPool){
+        var self = this;
+        deviceForm.on('submit', function(e){
+            var $form = $(this);
+            var id = +$form.find('[name=zone]').val();
+            var timeElement = $form.find('.timer');
+            var action = self._setTimersBehavior(e, timersPool, id, timeElement, $form);
+            if (action == "enroll" && !self._confirm("Are you sure you want to enroll this device?")){
+                e.preventDefault();
+                return;
+            }
+            action == self._stopTimerBtnName ? e.preventDefault() : self.Submit(this, e);
+        });
+
+        deviceForm.on('change', function(e){
             self.Submit(this, e);
         });
+    },
+
+    _confirm: function(text){
+        return confirm(text);
+    },
+
+    _setTimersBehavior: function(e, timersPool, id, timeElement, form){
+        var self = this;
+        var action = e.originalEvent.explicitOriginalTarget.name;
+        var timer = timersPool[id];
+
+        if (action == self._startTimerBtnName){
+            if (!timer.IsTiming && !self._isOpened){
+                timer.StartTimer(timersPool);
+            }
+            self._isOpened = !self._isOpened;
+            var openClose = form.find('[name='+self._startTimerBtnName+']');
+            openClose.val(self._isOpened ? "Close" : "Open");
+        }
+
+        if (action == self._stopTimerBtnName){
+            timer.IsTiming ? timer.StopTimer(timersPool) : timeElement.text("0:00");
+        }
+        return action;
     }
 });
 

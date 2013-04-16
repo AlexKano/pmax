@@ -9,7 +9,8 @@
     }
 </style>
 
-<form id="IPMPlog" name="IPMPlog" method="post" action="ipmpLog">
+<form id="IPMPlog" name="IPMPlog" method="post" action={% url 'ipmpLog' %}>
+{% csrf_token %}
 <table width="100%" height="97"  cellpadding="1">
     <tr>
         <th>IP:</th>

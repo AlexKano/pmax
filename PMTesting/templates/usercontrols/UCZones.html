@@ -1,28 +1,31 @@
-{% for i in zones %}
-    <form class='{{ className }}' id="zone{{ i }}" name="zone{{ i }}" method="post" action="device">
-        <table width="780" >
+{% for info in zones %}
+    <form class='{{ className }}' id="zones{{ info.ZoneId }}" name="zone{{ info.ZoneId }}" method="post" action={% url 'device_view' panel.Type %} >
+        {% csrf_token %}
+        <table width="780" align="center">
             <tr>
                 <td>
-                    Zone {{ i }}
-                   <input type="hidden" name="zone" value='{{ i }}' />
+                    Zone {{ info.ZoneId }}
+                    <input type="hidden" name="zone" value='{{ info.ZoneId }}' />
                 </td>
                 <td>
-                    {% include "usercontrols/select.html" with id="location" options=locations selected_option=locations.i only %}
+                    {% include "usercontrols/select.html" with id="location" options=locations only %}
                 </td>
                 <td>
-                    {% include "usercontrols/select.html" with id="zone_type" options=zone_types selected_option=zone_types.i only %}
+                    {% include "usercontrols/select.html" with id="zone_type" options=zone_types only %}
                 </td>
                 <td>
-                    {% include "usercontrols/select.html" with id="partition" options=partitions only %}
+                    {% include "usercontrols/select.html" with id="partition" options=partitions selectedValue=info.Partition only %}
                 </td>
                 <td>
-                    <input type="submit" name="{{ device_buttons.ENROLL }}" id="enrol{{ i }}" value="Enroll" />
-                    <input type="submit" name="{{ device_buttons.TAMPER }}" id="tamper{{ i }}" value="Open Tamper" />
-                    <input type="submit" name="{{ device_buttons.OPEN }}" id="open{{ i }}" value="Open" />
+                    <input type="submit" name="{{ device_buttons.ENROLL }}" id="enrol{{ info.ZoneId }}" value="Enroll" />
+                    <input type="submit" name="{{ device_buttons.TAMPER }}" id="tamper{{ info.ZoneId }}" value="Open Tamper" />
+                    <input type="submit" name="{{ device_buttons.OPEN }}" id="open{{ info.ZoneId }}" value="Open" />
+                </td>
+                <td width="50px">
+                    <span class="timer" id="timer{{ info.ZoneId }}" align="center" style="margin:0"></span>
                 </td>
                 <td>
-                    <span id="timer{{ i }}" align="center" style="margin:0">0</span>
-                    <input type="submit" name="{{ device_buttons.STOP }}" id="Stop{{ i }}" value="Stop" />
+                    <input type="submit" name="{{ device_buttons.STOP }}" id="Stop{{ info.ZoneId }}" value="Stop" />
                 </td>
             </tr>
         </table>

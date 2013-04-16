@@ -1,12 +1,13 @@
 # ~*~ coding: utf-8 ~*~
 
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from pmax.data.Constants import Constants
-from pmax.logic.Device import Device, DeviceActions
-from pmax.logic.Panel import Panel, PanelActions
+from pmax.logic.Device import *
+from pmax.logic.Panel import *
 from pmax.core.IpmpLog import IpmpLog
 
 
@@ -14,25 +15,39 @@ def main_page(request):
     return render_to_response('main.html')
 
 
-def powerMaster10_page(request):
+def powerMaster_page(request, panel_type):
+    panel = Panel(panel_type)
+    cachedPanel = Panel.GetByType(panel.Type)
+    if cachedPanel is None:
+        CONTACT_ZONES = [1, 2, 3, 4, 5]
+        MOTION_ZONES = [6, 7]
+        contacts = __getZonesInfo(CONTACT_ZONES, DeviceType.CONTACT)
+        motions = __getZonesInfo(MOTION_ZONES, DeviceType.MOTION)
+
+        panel.Devices.extend(contacts)
+        panel.Devices.extend(motions)
+        Panel.SetByType(panel)
+    else:
+        panel = cachedPanel
+
     response = __getResponseParams()
-    response["type"] = Constants.POWER_MAX_10
-    return render_to_response('PowerMaster.html', response)
+    response["contacts_info"] = [d for d in panel.Devices if d.Type == DeviceType.CONTACT]
+    response["motions_info"] = [d for d in panel.Devices if d.Type == DeviceType.MOTION]
+    response["panel"] = panel
+
+    return render_to_response('PowerMaster.html', response, context_instance=RequestContext(request))
 
 
-def powerMaster30_page(request):
-    response = __getResponseParams()
-    response["type"] = Constants.POWER_MAX_30
-    return render_to_response('PowerMaster.html', response)
-	
-	
-	
+def __getZonesInfo(zones_numbers, zone_type):
+    zones_info = []
+    for i in zones_numbers:
+        newDevice = Device(i, i - 1, i - 1, 0, zone_type)
+        zones_info.append(newDevice)
+    return zones_info
+
+
 def __getResponseParams():
-    contacts_info = [Device(),Device(),Device()Device(),Device()]
-    return {"contact_zones": Constants.CONTACT_ZONES,
-            "contacts_info": contacts_info
-            "motion_zones": Constants.MOTION_ZONES,
-            "partitions": Constants.PARTITIONS,
+    return {"partitions": Constants.PARTITIONS,
             "zone_types": Constants.ZONE_TYPES,
             'locations': Constants.LOCATIONS,
             'device_buttons': DeviceActions,
@@ -41,80 +56,59 @@ def __getResponseParams():
 
 
 @csrf_exempt
-def device_view(request):
-    device = Device(request.POST)
-    response = {"error": ""}
-    try:
-        device.InvokeAction()
-    except Exception, e:
-        response["error"] = e.message
+def device_view(request, panel_type):
+    panel = Panel.GetByType(panel_type)
+    device = panel.GetDeviceByZone(int(request.POST.get("zone", 0)))
 
+    response = json.dumps({"error": ""})
+    action = request.POST.get("action")
+    if action is not None and action != 'undefined':
+        try:
+            device.Action = action
+            #device.InvokeAction()
+            pass
+        except Exception, e:
+            response["error"] = e.message
+    else:
+        device.Update(request.POST)
     return HttpResponse(response)
 
 
-# import contextlib
-# import selenium.webdriver as webdriver
-# import selenium.webdriver.support.ui as ui
-# def aaa():
-#     with contextlib.closing(webdriver.Firefox()) as driver:
-#         driver.get('http://www.google.com')
-#         wait = ui.WebDriverWait(driver, 10)
-#         wait.until(lambda driver: driver.find_element_by_id("asdfsdfasdfszd"))
-#         print(driver.title)
-
-
 @csrf_exempt
-def panel_view(request):
-	panel = Panel(request.POST)
-	if panel.Action is None:
-		return HttpResponse(panel.GetScreen())
-	else:
-		panel.InvokeAction()
-		response = json.dumps({ 'success': 'success' , 'error': ''})
-		return HttpResponse(response)
+def panel_view(request, panel_type):
+    panel = Panel.GetByType(panel_type)
+    panel.Action = request.POST.get('action', None)
+    panel.CustomAction = request.POST.get('custom_action', None)
+
+    if panel.Action is None:
+        return HttpResponse(panel.GetScreen())
+    else:
+        response = json.dumps({'error': ''})
+        try:
+            panel.InvokeAction()
+        except Exception, e:
+            response["error"] = e.message
+        return HttpResponse(response)
 
 
-# from pmax.core.Cache import GlobalStorage
-# import time
-# @csrf_exempt
-# def ipmp_log_view(request):
-    # time.sleep(1)
-    # post = request.POST
-    # lines = []
-    # if post.get('action') == 'run':
-        # if not GlobalStorage.IpmpLog:
-            # GlobalStorage.IpmpLog = IpmpLog(post.get('IP'), post.get('user'), post.get('pass'))
-        # log = GlobalStorage.IpmpLog
-        # log.openSSHSession()
-        # log.startLog()
-        # lines = log.getLog()
-    # else:
-        # GlobalStorage.IpmpLog.closeSSHSession()
-        # GlobalStorage.IpmpLog = None
-
-    # response = json.dumps({ 'lines': lines })
-    # return HttpResponse(response)
-
-
-from django.core.cache import cache
-import time
-CACHE_KEY_IPMP_LOG = "IPMP_LOG"
 @csrf_exempt
 def ipmp_log_view(request):
-    time.sleep(1)
     post = request.POST
+    IP = post.get('IP')
+
+    log = IpmpLog.GetByIP(IP)
+    if log is None:
+        log = IpmpLog(IP, post.get('user'), post.get('pass'))
+        IpmpLog.SetByIP(log)
+
     lines = []
     if post.get('action') == 'run':
-        log = cache.get(CACHE_KEY_IPMP_LOG)
-        if log is None:
-            log = IpmpLog(post.get('IP'), post.get('user'), post.get('pass'))
-            cache.set(CACHE_KEY_IPMP_LOG, log,)
         log.openSSHSession()
         log.startLog()
         lines = log.getLog()
-    else:
-        cache.get(CACHE_KEY_IPMP_LOG).closeSSHSession()
-        cache.delete(CACHE_KEY_IPMP_LOG)
+    else:   # stop read log from ipmp
+        log.closeSSHSession()
 
-    response = json.dumps({ 'lines': lines })
+    response = json.dumps({'lines': lines})
     return HttpResponse(response)
+

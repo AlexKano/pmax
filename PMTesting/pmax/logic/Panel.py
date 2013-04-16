@@ -1,7 +1,9 @@
 __author__ = 'KANO'
-#import random
 #import logging
 import xmlrpclib
+from pmax.data.Constants import Constants
+from pmax.core.Cache import GlobalStorage
+
 
 class PanelActions:
     NEXT = "next"
@@ -37,35 +39,60 @@ class PanelActions:
 
 
 class Panel:
-    navigator = xmlrpclib.ServerProxy('http://127.0.0.1:8000')
+    PANEL_CACHE_KEY_TYPE = "PANEL_CACHE_KEY_"
+
+    _navigator = None
+    Devices = []
+    Type = None
     Action = None
-    CustomAction = None
+    CustomActions = {}
 
-    # _actions = {}
-    # _actionKeyDict = {}
+    def __init__(self, panel_type):
+        self.Type = self.__getType(panel_type)
 
-    def __init__(self, params):
-        self.Action = params.get('action', None)
-        self.CustomAction = params.get('custom_action', None)
-        #pass
-        #self.__initActions()
-        #logging.basicConfig(filename='example.log', level=logging.INFO)
+        self.__initCustomActions()
+        #self._navigator = xmlrpclib.ServerProxy('http://127.0.0.1:51487')
 
     def GetScreen(self):
-        #s = ["READY", "STEADY", "XYU", "AI", "LOS", "BENITO"]
-        #return s[random.randint(0, len(s) - 1)]
-        return self.navigator.get_lcd()
+        return self._navigator.get_lcd()
 
-    #def LogToInst(self, event):
-       # navigator.login('9999')
-    #
-    #def LogToUser(self, event):
-        #self.navigator.loginToUserSettings('1111')
+    def GetDeviceByZone(self, zoneId):
+        for d in self.Devices:
+            if d.ZoneId == zoneId:
+                return d
+        return None
 
     def InvokeAction(self):
-	    #pass
-        #logging.info(self.Action)
         if self.Action == PanelActions.RUN_CUSTOM:
             self.__runCustomAction()
         else:
-            self.navigator.send_key(self.Action)
+            self._navigator.send_key(self.Action)
+
+    @classmethod
+    def GetByType(cls, panel_type):
+        return GlobalStorage.Panels.get(cls.PANEL_CACHE_KEY_TYPE + panel_type)
+        # return cache.get(cls.PANEL_CACHE_KEY_TYPE + panel_type)
+
+    @classmethod
+    def SetByType(cls, panel):
+        GlobalStorage.Panels[cls.PANEL_CACHE_KEY_TYPE + panel.Type] = panel
+        # cache.set(cls.PANEL_CACHE_KEY_TYPE + panel.Type, panel)
+
+
+    ######## private methods ########
+    def __getType(self, panel_type):
+        return Constants.POWER_MAX_10 if panel_type == Constants.POWER_MAX_10 else Constants.POWER_MAX_30
+
+    def __initCustomActions(self):
+        if not self.CustomActions:
+            self.CustomActions = {PanelActions.LOGIN_TO_INST: self.__logToInst,
+                                  PanelActions.LOGIN_TO_USER: self.__logToUser}
+
+    def __runCustomAction(self):
+        self.CustomActions[self.Action](self)
+
+    def __logToInst(self):
+        self._navigator.login('9999')
+
+    def __logToUser(self):
+        self._navigator.loginToUserSettings('1111')

@@ -4,7 +4,8 @@
     }
 </style>
 
-<form id="Panel" name="Panel" method="post" action="panel" >
+<form id="Panel" name="Panel" method="post" action={% url 'panel_view' panel.Type %}>
+{% csrf_token %}
 <table width="270"  bgcolor="#FFFFCC" style="border-collapse: separate;">
     <tr>
         <td height="52" colspan="4" bgcolor="#0099FF">
