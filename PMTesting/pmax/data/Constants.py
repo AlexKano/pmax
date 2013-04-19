@@ -10,5 +10,5 @@ class Constants:
                  "Yard", "Custom 1", "Custom 2", "Custom 3", "Custom 4", "Custom 5", "Attic", "Basement", "Bedroom",
                  "Closet", "Den", "Dining room", "Downstairs", "Emergency", "Fire"]
     PARTITIONS = ['1', '2', '3', '1+2', '1+3', '2+3', '1+2+3']
-    ZONE_TYPES = ['Delay 1', 'Delay 2', 'Interior', 'Inter-follow', 'Perim-follow', 'Perimeter', 'Home-Delay',
-                  'Arming key', 'Emergency', 'Guard keybox', 'Non-alarm', '24h silent', '24h audible']
+    ZONE_TYPES = ['Delay 1', 'Delay 2', 'Interior','Inter-follow', 'Perim-follow', 'Perimeter', 'Home-Delay',
+                  'Arming key', 'Delay 2', 'Emergency', 'Guard keybox', 'Non-alarm', '24h silent', '24h audible']

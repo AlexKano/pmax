@@ -4,11 +4,11 @@ sys.path.append(".\Modules")
 import os
 import time
 import datetime
-import devices
+#import devices
 import random
 import card
 import out
-import navigator
+#import navigator
 import select
 
 def login(ip_adress='212.90.164.10',uname='root',pwd='visonic'):

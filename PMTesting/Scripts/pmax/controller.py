@@ -997,7 +997,7 @@ class _RELAY_API:
 
 		#print time1	
 		time.sleep(time1)
-		#print ">> Pressing "+bit17_24 +" "+bit9_16+" "+bit1_8+" key"
+		print ">> Pressing "+bit17_24 +" "+bit9_16+" "+bit1_8+" key"
 		ts = 0
 		if hex1_8 != "00" or hex9_16 != "00":
 			relay(hex1_8,hex9_16,'02',"01") #release 1 key on card 1

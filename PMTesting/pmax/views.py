@@ -60,18 +60,17 @@ def device_view(request, panel_type):
     panel = Panel.GetByType(panel_type)
     device = panel.GetDeviceByZone(int(request.POST.get("zone", 0)))
 
-    response = json.dumps({"error": ""})
+    response = {"error": ""}
     action = request.POST.get("action")
     if action is not None and action != 'undefined':
         try:
             device.Action = action
-            #device.InvokeAction()
-            pass
+            device.InvokeAction()
         except Exception, e:
             response["error"] = e.message
     else:
         device.Update(request.POST)
-    return HttpResponse(response)
+    return HttpResponse(json.dumps(response))
 
 
 @csrf_exempt
@@ -83,12 +82,12 @@ def panel_view(request, panel_type):
     if panel.Action is None:
         return HttpResponse(panel.GetScreen())
     else:
-        response = json.dumps({'error': ''})
+        response = {'error': ''}
         try:
             panel.InvokeAction()
         except Exception, e:
             response["error"] = e.message
-        return HttpResponse(response)
+        return HttpResponse(json.dumps(response))
 
 
 @csrf_exempt
@@ -101,14 +100,16 @@ def ipmp_log_view(request):
         log = IpmpLog(IP, post.get('user'), post.get('pass'))
         IpmpLog.SetByIP(log)
 
+    resp = {'error': ''}
     lines = []
     if post.get('action') == 'run':
         log.openSSHSession()
         log.startLog()
         lines = log.getLog()
+        resp['lines'] = lines
     else:   # stop read log from ipmp
         log.closeSSHSession()
 
-    response = json.dumps({'lines': lines})
+    response = json.dumps(resp)
     return HttpResponse(response)
 

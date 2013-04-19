@@ -51,7 +51,7 @@ class Panel:
         self.Type = self.__getType(panel_type)
 
         self.__initCustomActions()
-        #self._navigator = xmlrpclib.ServerProxy('http://127.0.0.1:51487')
+        self._navigator = xmlrpclib.ServerProxy('http://127.0.0.1:50000')
 
     def GetScreen(self):
         return self._navigator.get_lcd()
