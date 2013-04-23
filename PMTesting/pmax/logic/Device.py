@@ -27,23 +27,23 @@ class Device:
     _actions = {}
     card = xmlrpclib.ServerProxy('http://127.0.0.1:50000')
 
-    _enrollParameters = [("0", "10000", "0", 4, 1),
-                         ("0", "1", "0", 4, 1),
-                         ("10000", "0", "0", 4, 1),
-                         ("1", "0", "0", 4, 1),
-                         ("0", "0", "10000", 4, 1)]
+    _enrollParameters = [("0", "10000", "0", "4", "1"),
+                         ("0", "1", "0", "4", "1"),
+                         ("10000", "0", "0", "4", "1"),
+                         ("1", "0", "0", "4", "1"),
+                         ("0", "0", "10000", "4", "1")]
     
-    _tamperParameters = [(8192, "close" if _tamperOpen else "open", 0.1),
-                         (512, "close" if _tamperOpen else "open", 0.1),
-                         (32, "close" if _tamperOpen else "open", 0.1),
-                         (2, "close" if _tamperOpen else "open", 0.1),
-                         ("0", "0", "100000", "0", "close" if _tamperOpen else "open", 0.1)]
+    _tamperParameters = [("8192", "close" if _tamperOpen else "open"),
+                         ("512", "close" if _tamperOpen else "open"),
+                         ("32", "close" if _tamperOpen else "open"),
+                         ("2", "close" if _tamperOpen else "open"),
+                         ("0", "0", "100000", "0", "close" if _tamperOpen else "open")]
 
-    _openParameters = [(16384, "close" if _contactOpen else "open", 0.1),
-                         (1024, "close" if _contactOpen else "open", 0.1),
-                         (64, "close" if _contactOpen else "open", 0.1),
-                         (4, "close" if _contactOpen else "open", 0.1),
-                         ("0","0","1000000","0", "close" if _contactOpen else "open", 0.1)]
+    _openParameters = [("16384", "close" if _contactOpen else "open"),
+                         ("1024", "close" if _contactOpen else "open"),
+                         ("64", "close" if _contactOpen else "open"),
+                         ("4", "close" if _contactOpen else "open"),
+                         ("0","0","1000000","0", "close" if _contactOpen else "open")]
 
     def __init__(self, zoneId, location, zone_type, partition, device_type):
         self.ZoneId = zoneId
@@ -60,7 +60,7 @@ class Device:
                          DeviceActions.OPEN: self.__open}
 
     def InvokeAction(self):
-        self._actions[self.Action](self)
+        self._actions[self.Action]()
 
     def Update(self, post_params):
         self.Location = int(post_params.get("location"))
@@ -68,21 +68,21 @@ class Device:
         self.Partition = int(post_params.get("partition"))
 
     def __enroll(self):
-        card.key_b(self._enrollParameters[self.ZoneId])
+        self.card.key_b(self._enrollParameters[self.ZoneId])
         return "enrolled"
 
     def __tamper(self):
         if self.ZoneId == 5:
-            card.relaykey_b32(self._tamperParameters[self.ZoneId])
+            self.card.relaykey_b32(self._tamperParameters[self.ZoneId])
         else:
-            card.relaykey(self._tamperParameters[self.ZoneId])
+            self.card.relaykey(self._tamperParameters[self.ZoneId])
         self._tamperOpen = not self._tamperOpen
         return "tampered"
 
     def __open(self):
         if self.ZoneId == 5:
-            card.relaykey_b32(self._openParameters[self.ZoneId])
+            self.card.relaykey_b32(self._openParameters[self.ZoneId])
         else:
-            card.relaykey(self._openParameters[self.ZoneId])
+            self.card.relaykey(self._openParameters[self.ZoneId])
         self._contactOpen = not self.__contactOpen
         return "open smth"

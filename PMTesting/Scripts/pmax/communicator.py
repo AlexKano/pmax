@@ -275,7 +275,7 @@ class Communicator(Reader):
             #packet_end += 2 # set on x90 byte
             last_byte = ord(bufer[0])
             #log.write("pgh_handler |last byte: %02X" % ord(bufer[last_byte]))
-            if  (len(bufer) > last_byte) and (bufer[last_byte] == '\'):
+            if  (len(bufer) > last_byte) and (bufer[last_byte] == '\x0A'):
                 packet = bufer[:last_byte + 1]
                 # log.write("{0} proto=HPR [RX]: {1}".format(self._port_name, hexdump(packet)), "debug")                        
                 return packet

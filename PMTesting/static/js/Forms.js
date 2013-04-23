@@ -24,9 +24,9 @@ Form.prototype = {
             success : function(d) {
                 self._disableBtn(false);
 
-                var data = $.parseJSON(d).error;
-                if (data.error){
-                    alert(data.error);
+                var error = $.parseJSON(d).error;
+                if (error){
+                    alert(error);
                 }
             }
         });
@@ -99,9 +99,11 @@ jQuery.extend(Device.prototype, {
             if (!timer.IsTiming && !self._isOpened){
                 timer.StartTimer(timersPool);
             }
-            self._isOpened = !self._isOpened;
             var openClose = form.find('[name='+self._startTimerBtnName+']');
-            openClose.val(self._isOpened ? "Close" : "Open");
+            if (openClose.val() != "Activate"){
+				self._isOpened = !self._isOpened;
+				openClose.val(self._isOpened ? "Close" : "Open");
+			}				
         }
 
         if (action == self._stopTimerBtnName){
@@ -126,12 +128,14 @@ jQuery.extend(Panel.prototype, {
     EnableScreenUpdate: false,
     CustomActionsList:null,
     btnRunCustom: null,
+	_actionUrl: null,
 
     Init: function(){
         var self = this;
         self.PanelBlock =  $('#PanelUI').draggable();
         var block = self.PanelBlock;
         self.MainForm = block.find("#Panel");
+		self._actionUrl = self.MainForm.attr('action');
         self.Screen = block.find('#panel_screen');
         self.HideBtn = block.find("#hidePanel");
         self.CustomActionsList = block.find('#custom_action');
@@ -185,7 +189,7 @@ jQuery.extend(Panel.prototype, {
         var self = this;
         $.ajax({
             type : "POST",
-            url : "panel_view",
+            url : self._actionUrl,
             success : function(data) {
                 self.Screen.text(data);
             }

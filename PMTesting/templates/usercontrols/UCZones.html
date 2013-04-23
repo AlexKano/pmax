@@ -8,10 +8,10 @@
                     <input type="hidden" name="zone" value='{{ info.ZoneId }}' />
                 </td>
                 <td>
-                    {% include "usercontrols/select.html" with id="location" options=locations only %}
+                    {% include "usercontrols/select.html" with id="location" options=locations selectedValue=info.Location only %}
                 </td>
                 <td>
-                    {% include "usercontrols/select.html" with id="zone_type" options=zone_types only %}
+                    {% include "usercontrols/select.html" with id="zone_type" options=zone_types selectedValue=info.ZoneType only %}
                 </td>
                 <td>
                     {% include "usercontrols/select.html" with id="partition" options=partitions selectedValue=info.Partition only %}
@@ -19,7 +19,7 @@
                 <td>
                     <input type="submit" name="{{ device_buttons.ENROLL }}" id="enrol{{ info.ZoneId }}" value="Enroll" />
                     <input type="submit" name="{{ device_buttons.TAMPER }}" id="tamper{{ info.ZoneId }}" value="Open Tamper" />
-                    <input type="submit" name="{{ device_buttons.OPEN }}" id="open{{ info.ZoneId }}" value="Open" />
+                    <input type="submit" name="{{ device_buttons.OPEN }}" id="open{{ info.ZoneId }}" value={% if info.Type == 'Motion' %}"Activate"{% else %}"Open"{% endif %} />
                 </td>
                 <td width="50px">
                     <span class="timer" id="timer{{ info.ZoneId }}" align="center" style="margin:0"></span>
