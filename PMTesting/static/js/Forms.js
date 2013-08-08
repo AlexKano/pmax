@@ -3,19 +3,21 @@ function Form() {}
 Form.prototype = {
     Submit: function(form, evt){
         evt.preventDefault();
-        var btn = evt.originalEvent.explicitOriginalTarget;
+
+        var self = this;
+        var btn = self._getSubmitButton(evt);
 
         var $form = $(form);
         var data = $form.serialize();
         data += '&action=' + btn.name;
         var url = $form.attr('action');
 
-        var self = this;
         self._disableBtn(true);
 
         if (document.DEBUG)
             console.log(url);
             console.log(data);
+
         return $.ajax({
             type : "POST",
             cache : false,
@@ -42,6 +44,10 @@ Form.prototype = {
             $btn.removeAttr("disabled");
             $btn.removeClass("ui-state-disabled");
         }
+    },
+
+    _getSubmitButton: function(evt){
+        return evt.originalEvent.explicitOriginalTarget;
     }
 };
 
@@ -92,7 +98,7 @@ jQuery.extend(Device.prototype, {
 
     _setTimersBehavior: function(e, timersPool, id, timeElement, form){
         var self = this;
-        var action = e.originalEvent.explicitOriginalTarget.name;
+        var action = self._getSubmitButton(e).name;
         var timer = timersPool[id];
 
         if (action == self._startTimerBtnName){
@@ -207,7 +213,7 @@ jQuery.extend(Panel.prototype, {
             clearTimeout(this._timerId);
         }
     }
-})
+});
 
 // contact, motion, etc.
 function IpmpLog() {}
@@ -229,7 +235,7 @@ jQuery.extend(IpmpLog.prototype, {
         self.MainForm.on('submit', function(e){
             self.Submit(this, e)
                 .then(function(data){
-                    var action = e.originalEvent.explicitOriginalTarget.name;
+                    var action = self._getSubmitButton(e).name;
                     self._disableBtn(self.btnRun, action == "run");
                     self._disableBtn(self.btnStop, action == "stop");
 
