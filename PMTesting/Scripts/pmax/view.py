@@ -7,7 +7,7 @@ from common import log
 class XMLRPC(threading.Thread):
     _Server = None
 
-    def __init__(self, API, host = "localhost", port = 8000):
+    def __init__(self, API, host = "localhost", port = 50000):
         threading.Thread.__init__(self)
         verbosity = False
         if (config.VERBOSE):
