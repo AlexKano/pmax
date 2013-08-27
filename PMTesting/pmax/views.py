@@ -80,7 +80,8 @@ def panel_view(request, panel_type):
     panel.CustomAction = request.POST.get('custom_action', None)
 
     if panel.Action is None:
-        return HttpResponse(panel.GetScreen())
+        #return HttpResponse(panel.GetScreen())
+        return HttpResponse(json.dumps( {'screen' : panel.GetScreen()} ))
     else:
         response = {'error': ''}
         try:

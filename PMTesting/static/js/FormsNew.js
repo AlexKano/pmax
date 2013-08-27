@@ -29,14 +29,16 @@ Updater.prototype = {
 
 		var settings = self.settings;
 		settings._updaterId = setInterval(function() {
-			document.DEBUG && (console.log(settings.url);
+			document.DEBUG && console.log(settings.Url);
 			$.ajax({
 				type: "GET",
 				cache : false,
 				url: settings.Url,
 				success: function(json) {
+					
 					var data = $.parseJSON(json);
-					document.DEBUG && (console.log(json) || console.log(data));
+					//document.DEBUG && (console.log(json) || console.log(data));
+					document.DEBUG && console.log(json, data);
 					try {
 						// settings.Handler.call(settings.Context, data);
 						settings.Handler(data);
@@ -65,7 +67,7 @@ Updater.prototype = {
 // base class
 function Form() {}
 Form.prototype = {	
-	_updaters: []
+	_updaters: [],
 	
 	StartUpdater: function(url, func, interv){
 		var settings = this._getUpdaterSettings(url, func, interv);
@@ -239,15 +241,17 @@ jQuery.extend(Panel.prototype, {
 	
 	_initControls: function(){
 		this.PanelBlock = $('#PanelUI');
-		var block = self.PanelBlock;
-		block.offset(JSON.parse($.cookie("panel-position"));
+		var block = this.PanelBlock;
+		block.draggable();
+		/*
+		block.offset(JSON.parse($.cookie("panel-position")));
 		block.draggable({
 			stop: function(){
 				var offset = JSON.stringify(block.offset());
 				$.cookie("panel-position", offset);
 			}
 		});
-		        
+		*/        
         this.MainForm = block.find("#Panel");
         this.Screen = block.find('#panel_screen');
         this.HideBtn = block.find("#hidePanel");
@@ -259,7 +263,7 @@ jQuery.extend(Panel.prototype, {
 		var self = this;
 		
         self.MainForm.on('submit', function(e){
-            self.Submit(this, e).then(_updatePanelScreen);
+            self.Submit(this, e).then(self.updatePanelScreen);
         });
 		
         self.CustomActionsList.on('change', function(){
@@ -305,7 +309,7 @@ jQuery.extend(Panel.prototype, {
     },
 	
 	StartScreenUpdate: function() {
-		if (this.settings.EnableScreenUpdate){
+		if (this.settings.enableScreenUpdate){
 			this._screenUpdaterIdx = this.StartUpdater(this._actionUrl, $.proxy(this._updatePanelScreen, this), this.settings.screenUpdateInterval);
 		}
 	},

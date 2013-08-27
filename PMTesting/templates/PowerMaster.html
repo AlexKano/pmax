@@ -72,11 +72,11 @@
     </div>
 
 </div>
-<script type="text/javascript" src="{% static 'js/Forms.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/FormsNew.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/Timer.js' %}"></script>
 <script type="text/javascript" language="javascript">
 $(document).ready(function() {
-    document.DEBUG = true;
+    document.DEBUG = false;
 
     $( "input[type=submit]" ).button();
 
@@ -89,13 +89,15 @@ $(document).ready(function() {
         var device = new Device();
         device.Init($(this), timersPool.Pool, "{{ device_buttons.OPEN }}", "{{ device_buttons.STOP }}");
     });
-
+/*
     var panel = new Panel();
     panel.EnableScreenUpdate = true;
     panel.Init();
-
+*/
+    var panel = new Panel();
+        panel.Init( { enableScreenUpdate : true } );
     var ipmpLog = new IpmpLog();
-    ipmpLog.Init();
+        ipmpLog.Init();
 });
 
 </script>
