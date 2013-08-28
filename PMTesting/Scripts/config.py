@@ -4,9 +4,9 @@
 import os
 # automation port settings
 AUTO_COM_PORT = "COM1"
-AUTO_BAUD_RATE = 9600
+AUTO_BAUD_RATE = 38400
 # RF module port settings
-RELAY_PORT = "COM8"
+RELAY_PORT = "COM2"
 # panel sniffer port - 38400, detector port - 19200
 RELAY_BAUD_RATE = 9600
 

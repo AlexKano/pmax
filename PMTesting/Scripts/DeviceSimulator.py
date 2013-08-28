@@ -24,7 +24,7 @@ if __name__ == "__main__":
     try:
         RelayCommunicator = Communicator(config.RELAY_PORT, config.RELAY_BAUD_RATE, "RF")
     except serial.SerialException:
-        print "Can't open sniffer port " + config.RELAY
+        print "Can't open sniffer port " + config.RELAY_PORT
 	
     Controller = Controller(AutoCommunicator, RelayCommunicator)
     common.log.close()
