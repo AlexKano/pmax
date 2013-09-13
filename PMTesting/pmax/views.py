@@ -71,8 +71,7 @@ def device_view(request, panel_type):
     else:
         device.Update(request.POST)
     return HttpResponse(json.dumps(response))
-
-
+	
 @csrf_exempt
 def panel_view(request, panel_type):
     panel = Panel.GetByType(panel_type)
@@ -89,8 +88,12 @@ def panel_view(request, panel_type):
         except Exception, e:
             response["error"] = e.message
         return HttpResponse(json.dumps(response))
-
-
+@csrf_exempt
+def start_virtkp_mode(request, panel_type):
+        response = {'error':''}
+        panel = Panel.GetByType(panel_type)
+        panel.Show_time()
+        return HttpResponse(json.dumps(response))
 @csrf_exempt
 def ipmp_log_view(request):
     post = request.POST

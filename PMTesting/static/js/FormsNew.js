@@ -300,6 +300,7 @@ jQuery.extend(Panel.prototype, {
                 self.StopScreenUpdate();
             }
             else {
+                $.get('pm30/virt');
                 self.MainForm.show();
                 self.HideBtn.text("Hide");
                 self.StartScreenUpdate();

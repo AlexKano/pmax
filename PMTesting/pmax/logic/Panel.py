@@ -56,6 +56,9 @@ class Panel:
     def GetScreen(self):
         return self._navigator.get_lcd()
 
+    def Show_time(self):
+        self._navigator.start_vkp_mode()
+    
     def GetDeviceByZone(self, zoneId):
         for d in self.Devices:
             if d.ZoneId == zoneId:
