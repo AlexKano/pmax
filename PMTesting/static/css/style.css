@@ -101,3 +101,26 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
     margin-left: auto;
     margin-right: auto;
 }
+
+
+#errorBlock {
+	background: #ED6060;
+	color: #FFFFFF;
+	
+	position: fixed;
+	z-index: 9999;
+	left: 10px;
+	top: 10px;
+	
+	font-size: 12px;
+	font-family: Tahoma,Arial,Helvetica,sans-serif;
+	width: 250px;
+	padding: 6px 10px;
+}
+#errorBlock .close {
+	cursor: pointer;
+    float: right;
+    font-size: 1em;
+    font-weight: bold;
+    z-index: 99;
+}

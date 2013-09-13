@@ -1,4 +1,5 @@
-function ErrorHandler() {
+function ErrorHandler() {}
+ErrorHandler.prototype = {
 	_errorBlock: null,
 		
 	Init: function() {
@@ -6,27 +7,38 @@ function ErrorHandler() {
 	},
 	
 	_initErrorBlock: function() {
-		var css = {
-			'background': '#666', 
-			"color": "#fff", 
-			"position": "absolute", 
-			"left": "10px", 
-			"right": "10px"
-		};
-		this._errorBlock = $('<div id="errorBlock"></div>').css(css);
-		this._errorBlock.hide().appendTo( $("body") );
+		var self = this;
+		var close = $('<div class="close">×</div>');
+		close.click(self._hideError);
+		var message = $('<div class="message"></div>');
+		self._errorBlock = $('<div id="errorBlock"></div>').append(close).append(message);
+		self._errorBlock.hide().appendTo( $("body") );		
 	},
 	
-	ShowError: function(message) {
-		this._errorBlock
-			.innerHTML(message).show()
-			.setTimeout(function () {
-				self._errorBlock.hide(250);
-			}, 750);
+	Check: function(data) {
+		if (data.error) this.PopupError(data.error);
+		return !data.error;
+	},
+	
+	PopupError: function(message) {
+		var self = this;
+		self._errorBlock.find('.message').html(message)
+		self._errorBlock.show();
+		
+		self._hideWithTimeout();
+	},
+	
+	_hideWithTimeout: function(timeout, hideTime) {
+		var self = this;
+		setTimeout(function () { self._hideError(hideTime || 250); }, timeout || 750);
+	},
+	_hideError: function (hideTime) {
+		this._errorBlock.fadeOut(hideTime || 250);
 	},
 }
 var errorHandler = ErrorHandler();
-errorHander.Init();
+errorHandler.Init();
+
 
 function Updater() { }
 Updater.prototype = {
@@ -58,8 +70,9 @@ Updater.prototype = {
 				success: function(json) {					
 					var data = $.parseJSON(json);
 					document.DEBUG && console.log(json, data);
-					
-					data.error ? errorHandler.ShowError(data.error) : settings.Handler(data);
+					if (errorHandler.Check(data)) {
+						settings.Handler(data);
+					}
 				}
 			});
 		}, settings.Interv);
@@ -128,13 +141,9 @@ Form.prototype = {
             data: data,
             success: function(d) {
 				document.DEBUG && console.log(d);
-				
                 //self._disableBtn(btn, false);
-
                 var data = $.parseJSON(d);
-                if (data.error){
-                    errorHandler.ShowError(data.error);
-                }
+                errorHandler.Check(data);
             }
         });
     },
