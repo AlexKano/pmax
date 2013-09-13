@@ -13,13 +13,18 @@ Updater.prototype = {
 		
 	Init: function(options){
 		$.extend(this.settings, options);
-		this._errorBlock = $('<div/>').css({
-										'background': '#666', 
-										"color": "#fff", 
-										"position": "absolute", 
-										"left": "10px", 
-										"right": "10px"
-									});
+		this._initErrorBlock();
+	},
+	
+	_initErrorBlock: function() {
+		var css = {
+			'background': '#666', 
+			"color": "#fff", 
+			"position": "absolute", 
+			"left": "10px", 
+			"right": "10px"
+		};
+		this._errorBlock = $('<div/>').css(css);
 		this._errorBlock.hide().appendTo( $(document) );
 	},
 	
@@ -34,26 +39,23 @@ Updater.prototype = {
 				type: "GET",
 				cache : false,
 				url: settings.Url,
-				success: function(json) {
-					
+				success: function(json) {					
 					var data = $.parseJSON(json);
-					//document.DEBUG && (console.log(json) || console.log(data));
 					document.DEBUG && console.log(json, data);
-					try {
-						// settings.Handler.call(settings.Context, data);
-						settings.Handler(data);
-					} 
-					catch(err) {
-						self._errorBlock
-							.innerHTML(err.message).show()
-							.setTimeout(function () {
-								self._errorBlock.hide(250);
-							}, 750);
-					}
+					
+					data.error ? self.ShowError(data.error) : settings.Handler(data);
 				}
 			});
 		}, settings.Interv);
 		self._isUpdating = true;
+	},
+	
+	ShowError: function(message) {
+		this._errorBlock
+			.innerHTML(message).show()
+			.setTimeout(function () {
+				self._errorBlock.hide(250);
+			}, 750);
 	},
 	
 	StopUpdater: function() {
@@ -105,7 +107,7 @@ Form.prototype = {
         var url = $form.attr('action');
 
         var self = this;
-        self._disableBtn(btn, true);
+        //self._disableBtn(btn, true);
 
         if (document.DEBUG){
             console.log(url);
@@ -118,10 +120,10 @@ Form.prototype = {
             success: function(d) {
 				document.DEBUG && console.log(d);
 				
-                self._disableBtn(btn, false);
+                //self._disableBtn(btn, false);
 
                 var data = $.parseJSON(d).error;
-                if (data.error){
+                if (data.error){	// todo change to error showing method
                     alert(data.error);
                 }
             }

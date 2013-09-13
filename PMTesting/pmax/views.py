@@ -62,14 +62,16 @@ def device_view(request, panel_type):
 
     response = {"error": ""}
     action = request.POST.get("action")
-    if action is not None and action != 'undefined':
-        try:
-            device.Action = action
-            device.InvokeAction()
-        except Exception, e:
-            response["error"] = e.message
-    else:
-        device.Update(request.POST)
+	
+	try:
+		if action is not None and action != 'undefined':			
+			device.Action = action
+			device.InvokeAction()
+		else:
+			device.Update(request.POST)
+	except Exception, e:
+		response["error"] = e.message
+		
     return HttpResponse(json.dumps(response))
 	
 @csrf_exempt
@@ -77,23 +79,30 @@ def panel_view(request, panel_type):
     panel = Panel.GetByType(panel_type)
     panel.Action = request.POST.get('action', None)
     panel.CustomAction = request.POST.get('custom_action', None)
-
-    if panel.Action is None:
-        #return HttpResponse(panel.GetScreen())
-        return HttpResponse(json.dumps( {'screen' : panel.GetScreen()} ))
-    else:
-        response = {'error': ''}
-        try:
-            panel.InvokeAction()
-        except Exception, e:
-            response["error"] = e.message
-        return HttpResponse(json.dumps(response))
+	
+	response = {'error': ''}
+	
+	try:
+		if panel.Action is None:
+			response['screen'] = panel.GetScreen();
+		else:
+			panel.InvokeAction()
+	except Exception, e:
+		response["error"] = e.message
+		
+	return HttpResponse(json.dumps(response))
+		
 @csrf_exempt
 def start_virtkp_mode(request, panel_type):
-        response = {'error':''}
-        panel = Panel.GetByType(panel_type)
-        panel.Show_time()
-        return HttpResponse(json.dumps(response))
+	response = {'error':''}
+	try:
+		panel = Panel.GetByType(panel_type)
+		panel.Show_time()
+	except Exception, e:
+		response["error"] = e.message
+		
+	return HttpResponse(json.dumps(response))
+		
 @csrf_exempt
 def ipmp_log_view(request):
     post = request.POST
