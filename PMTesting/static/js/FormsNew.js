@@ -1,6 +1,4 @@
-function Updater() {
-	_errorBlock: null;
-}
+function Updater() { }
 Updater.prototype = {
 	settings: {
 		Url: null,
@@ -11,6 +9,7 @@ Updater.prototype = {
 	
 	_updaterId: null,
 	_isUpdating: false,
+	_errorBlock: null,
 	
 	Init: function(options){
 		$.extend(this.settings, options);
@@ -125,7 +124,7 @@ Form.prototype = {
 
                 var data = $.parseJSON(d);
                 if (data.error){
-                    Updater.ShowError(data.error);
+                    Updater.prototype.ShowError(data.error);
                 }
             }
         });
