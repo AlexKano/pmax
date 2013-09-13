@@ -1,4 +1,6 @@
-function Updater() {}
+function Updater() {
+	_errorBlock: null;
+}
 Updater.prototype = {
 	settings: {
 		Url: null,
@@ -9,8 +11,7 @@ Updater.prototype = {
 	
 	_updaterId: null,
 	_isUpdating: false,
-	_errorBlock: null,
-		
+	
 	Init: function(options){
 		$.extend(this.settings, options);
 		this._initErrorBlock();
@@ -122,9 +123,9 @@ Form.prototype = {
 				
                 //self._disableBtn(btn, false);
 
-                var data = $.parseJSON(d).error;
-                if (data.error){	// todo change to error showing method
-                    alert(data.error);
+                var data = $.parseJSON(d);
+                if (data.error){
+                    Updater.ShowError(data.error);
                 }
             }
         });
