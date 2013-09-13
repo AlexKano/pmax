@@ -1,18 +1,7 @@
-function Updater() { }
-Updater.prototype = {
-	settings: {
-		Url: null,
-		Interv: 1000,
-		Handler: null,
-		//Context: null
-	},
-	
-	_updaterId: null,
-	_isUpdating: false,
+function ErrorHandler() {
 	_errorBlock: null,
-	
-	Init: function(options){
-		$.extend(this.settings, options);
+		
+	Init: function() {
 		this._initErrorBlock();
 	},
 	
@@ -28,6 +17,33 @@ Updater.prototype = {
 		this._errorBlock.hide().appendTo( $("body") );
 	},
 	
+	ShowError: function(message) {
+		this._errorBlock
+			.innerHTML(message).show()
+			.setTimeout(function () {
+				self._errorBlock.hide(250);
+			}, 750);
+	},
+}
+var errorHandler = ErrorHandler();
+errorHander.Init();
+
+function Updater() { }
+Updater.prototype = {
+	settings: {
+		Url: null,
+		Interv: 1000,
+		Handler: null,
+		//Context: null
+	},
+	
+	_updaterId: null,
+	_isUpdating: false,
+	
+	Init: function(options){
+		$.extend(this.settings, options);
+	},
+
 	StartUpdater: function(){
 		var self = this;
 		if (self._isUpdating) return;
@@ -43,20 +59,13 @@ Updater.prototype = {
 					var data = $.parseJSON(json);
 					document.DEBUG && console.log(json, data);
 					
-					data.error ? self.ShowError(data.error) : settings.Handler(data);
+					data.error ? errorHandler.ShowError(data.error) : settings.Handler(data);
 				}
 			});
 		}, settings.Interv);
 		self._isUpdating = true;
 	},
-	
-	ShowError: function(message) {
-		this._errorBlock
-			.innerHTML(message).show()
-			.setTimeout(function () {
-				self._errorBlock.hide(250);
-			}, 750);
-	},
+
 	
 	StopUpdater: function() {
 		if (this._isUpdating){
@@ -124,7 +133,7 @@ Form.prototype = {
 
                 var data = $.parseJSON(d);
                 if (data.error){
-                    Updater.prototype.ShowError(data.error);
+                    errorHandler.ShowError(data.error);
                 }
             }
         });
