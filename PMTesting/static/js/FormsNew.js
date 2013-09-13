@@ -24,8 +24,8 @@ Updater.prototype = {
 			"left": "10px", 
 			"right": "10px"
 		};
-		this._errorBlock = $('<div/>').css(css);
-		this._errorBlock.hide().appendTo( $(document) );
+		this._errorBlock = $('<div id="errorBlock"></div>').css(css);
+		this._errorBlock.hide().appendTo( $("body") );
 	},
 	
 	StartUpdater: function(){
