@@ -198,7 +198,8 @@ jQuery.extend(Device.prototype, {
             }
             self._isOpened = !self._isOpened;
             var openClose = form.find('[name='+self._startTimerBtnName+']');
-            openClose.val(self._isOpened ? "Close" : "Open");
+            if (openClose.val() != "Activate") 
+				openClose.val(self._isOpened ? "Close" : "Open");
         }
 
         if (action == self._stopTimerBtnName){
